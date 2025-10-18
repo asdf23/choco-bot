@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import express from 'express'; //FT-BS
 import {
   Client,
   GatewayIntentBits,
@@ -25,6 +26,10 @@ if (!TOKEN || !CLIENT_ID) {
   console.error('Missing TOKEN or CLIENT_ID in .env');
   process.exit(1);
 }
+
+const app = express();
+app.get('/', (_, res) => res.send('OK'));
+app.listen(process.env.PORT || 3000);
 
 // Track per-message click sets (resets on restart—fine for interest signups)
 const interestState = new Map(); // messageId -> { setup: Set<userId>, design: Set<userId> }
